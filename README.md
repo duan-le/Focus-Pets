@@ -1,2 +1,8 @@
 # Study-Timer-App
-app which helps study
+A gamified study timer app.
+
+# Team
+- Duan Le
+- Hemish Minhas
+- Nicolo Rivera
+- Shubh Sharma
