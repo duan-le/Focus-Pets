@@ -1,159 +1,151 @@
-const timer = {
-  pomodoro: 0,
-  shortBreak: 5,
-  longBreak: 15,
-  longBreakInterval: 4,
-  sessions: 0,
-  
-};
 let score = 0;
-let interval;
+let cycles = 0;
 
-const buttonSound = new Audio('button-sound.mp3');
-const mainButton = document.getElementById('js-btn');
-mainButton.addEventListener('click', () => {
-  buttonSound.play();
-  const { action } = mainButton.dataset;
-  if (action === 'start') {
-    startTimer();
+var pomodoro = {
+  started : false,
+  minutes : 0,
+  seconds : 0,
+  fillerHeight : 0,
+  fillerIncrement : 0,
+  interval : null,
+  minutesDom : null,
+  secondsDom : null,
+  fillerDom : null,
+
+  init : function(){
+    var self = this;
+    this.minutesDom = document.querySelector('#minutes');
+    this.secondsDom = document.querySelector('#seconds');
+    this.fillerDom = document.querySelector('#filler');
+    
+    this.interval = setInterval(function(){
+      self.intervalCallback.apply(self);
+    }, 1000);
+    document.querySelector('#work').onclick = function(){
+      self.startWork.apply(self);
+    };
+    document.querySelector('#shortBreak').onclick = function(){
+      self.startShortBreak.apply(self);
+    };
+    document.querySelector('#longBreak').onclick = function(){
+      self.startLongBreak.apply(self);
+    };
+    document.querySelector('#stop').onclick = function(){
+      self.stopTimer.apply(self);
+    };
+  },
+  resetVariables : function(mins, secs, started){
+    this.minutes = mins;
+    this.seconds = secs;
+    this.started = started;
+    this.fillerIncrement = 200/(this.minutes*60);
+    this.fillerHeight = 0;  
+  },
+  startWork: function() {
+    this.resetVariables(1, 0, true);
+  },
+  startShortBreak : function(){
+    this.resetVariables(5, 0, true);
+  },
+  startLongBreak : function(){
+    this.resetVariables(15, 0, true);
+  },
+  stopTimer : function(){
+    this.resetVariables(25, 0, false);
+    this.updateDom();
+  },
+  toDoubleDigit : function(num){
+    if(num < 10) {
+      return "0" + parseInt(num, 10);
+    }
+    return num;
+  },
+  updateDom : function(){
+    this.minutesDom.innerHTML = this.toDoubleDigit(this.minutes);
+    this.secondsDom.innerHTML = this.toDoubleDigit(this.seconds);
+    this.fillerHeight = this.fillerHeight + this.fillerIncrement;
+    this.fillerDom.style.height = this.fillerHeight + 'px';
+  },
+  intervalCallback : function(){
+    if(!this.started) return false;
+    if(this.seconds == 0) {
+      if(this.minutes == 0) {
+        
+        this.timerComplete();
+        return;
+      }
+      this.seconds = 59;
+      this.minutes--;
+    } else {
+      this.seconds--;
+    }
+    this.updateDom();
+  },
+  timerComplete : function(){
+    this.started = false;
+    this.fillerHeight = 0;
+    score += 50;
+    cycles += 1;
+    document.querySelector('#score').innerHTML = score;
+    document.querySelector('#cycles').innerHTML = cycles;
+    console.log(cycles)
+  }
+};
+window.onload = function(){
+pomodoro.init();
+};
+
+var myNodelist = document.getElementsByTagName("LI");
+var i;
+for (i = 0; i < myNodelist.length; i++) {
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  myNodelist[i].appendChild(span);
+}
+
+// Click on a close button to hide the current list item
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
+  }
+}
+
+// Add a "checked" symbol when clicking on a list item
+var list = document.querySelector('ul');
+list.addEventListener('click', function(ev) {
+  if (ev.target.tagName === 'LI') {
+    ev.target.classList.toggle('checked');
+  }
+}, false);
+
+// Create a new list item when clicking on the "Add" button
+function newElement() {
+  var li = document.createElement("li");
+  var inputValue = document.getElementById("myInput").value;
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    alert("You must write something!");
   } else {
-    stopTimer();
+    document.getElementById("myUL").appendChild(li);
   }
-});
+  document.getElementById("myInput").value = "";
 
-const modeButtons = document.querySelector('#js-mode-buttons');
-modeButtons.addEventListener('click', handleMode);
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
 
-function getRemainingTime(endTime) {
-  const currentTime = Date.parse(new Date());
-  const difference = endTime - currentTime;
-
-  const total = Number.parseInt(difference / 1000, 10);
-  const minutes = Number.parseInt((total / 60) % 60, 10);
-  const seconds = Number.parseInt(total % 60, 10);
-
-  return {
-    total,
-    minutes,
-    seconds,
-  };
-}
-
-function startTimer() {
-  let { total } = timer.remainingTime;
-  const endTime = Date.parse(new Date()) + total * 1000;
-
-  if (timer.mode === 'pomodoro') timer.sessions++;
-
-  mainButton.dataset.action = 'stop';
-  mainButton.textContent = 'stop';
-  mainButton.classList.add('active');
-
-  interval = setInterval(function() {
-    timer.remainingTime = getRemainingTime(endTime);
-    updateClock();
-
-    total = timer.remainingTime.total;
-    if (total <= 0) {
-      clearInterval(interval);
-      score += 50;
-      document.querySelector('.score').innerHTML = score
-      switch (timer.mode) {
-        case 'pomodoro':
-          if (timer.sessions % timer.longBreakInterval === 0) {
-            switchMode('longBreak');
-          } else {
-            switchMode('shortBreak');
-          }
-          break;
-        default:
-          switchMode('pomodoro');
-      }
-
-      if (Notification.permission === 'granted') {
-        const text =
-          timer.mode === 'pomodoro' ? 'Get back to work!' : 'Take a break!';
-        new Notification(text);
-      }
-
-      document.querySelector(`[data-sound="${timer.mode}"]`).play();
-
-      startTimer();
-    }
-  }, 1000);
-}
-
-function stopTimer() {
-  clearInterval(interval);
-
-  mainButton.dataset.action = 'start';
-  mainButton.textContent = 'start';
-  mainButton.classList.remove('active');
-}
-
-function updateClock() {
-  const { remainingTime } = timer;
-  const minutes = `${remainingTime.minutes}`.padStart(2, '0');
-  const seconds = `${remainingTime.seconds}`.padStart(2, '0');
-
-  const min = document.getElementById('js-minutes');
-  const sec = document.getElementById('js-seconds');
-  min.textContent = minutes;
-  sec.textContent = seconds;
-
-  const text =
-    timer.mode === 'pomodoro' ? 'Get back to work!' : 'Take a break!';
-  document.title = `${minutes}:${seconds} — ${text}`;
-
-  const progress = document.getElementById('js-progress');
-  progress.value = timer[timer.mode] * 60 - timer.remainingTime.total;
-}
-
-function switchMode(mode) {
-  timer.mode = mode;
-  timer.remainingTime = {
-    total: timer[mode] * 60,
-    minutes: timer[mode],
-    seconds: 0,
-  };
-
-  document
-    .querySelectorAll('button[data-mode]')
-    .forEach(e => e.classList.remove('active'));
-  document.querySelector(`[data-mode="${mode}"]`).classList.add('active');
-  document.body.style.backgroundColor = `var(--${mode})`;
-  document
-    .getElementById('js-progress')
-    .setAttribute('max', timer.remainingTime.total);
-
-  updateClock();
-}
-
-function handleMode(event) {
-  const { mode } = event.target.dataset;
-
-  if (!mode) return;
-
-  switchMode(mode);
-  stopTimer();
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  if ('Notification' in window) {
-    if (
-      Notification.permission !== 'granted' &&
-      Notification.permission !== 'denied'
-    ) {
-      Notification.requestPermission().then(function(permission) {
-        if (permission === 'granted') {
-          new Notification(
-            'Awesome! You will be notified at the start of each session'
-          );
-        }
-      });
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
     }
   }
-
-  switchMode('pomodoro');
-});
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+}

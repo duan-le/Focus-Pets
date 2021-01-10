@@ -1,84 +1,83 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Freshman Pomodoro Clock Demo</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div id="cat"></div>
-    <p class="score"></p>
-    <main class="app">
-      <progress id="js-progress" value="0"></progress>
-      <div class="progress-bar"></div>
-      <div class="timer">
-        <div class="button-group mode-buttons" id="js-mode-buttons">
-          <button
-            data-mode="pomodoro"
-            class="button active mode-button"
-            id="js-pomodoro"
-          >
-            Pomodoro
-          </button>
-          <button
-            data-mode="shortBreak"
-            class="button mode-button"
-            id="js-short-break"
-          >
-            Short break
-          </button>
-          <button
-            data-mode="longBreak"
-            class="button mode-button"
-            id="js-long-break"
-          >
-            Long break
-          </button>
-        </div>
-        <div class="clock" id="js-clock">
-          <span id="js-minutes">25</span>
-          <span class="separator">:</span>
-          <span id="js-seconds">00</span>
-        </div>
-        <button class="main-button" data-action="start" id="js-btn">
-          Start
-        </button>
-      </div>
-    </main>
-    <div class="hidden">
-      <audio src="backtowork.mp3" data-sound="pomodoro"></audio>
-      <audio src="break.mp3" data-sound="shortBreak"></audio>
-      <audio src="break.mp3" data-sound="longBreak"></audio>
-    </div>
-    <script src="main.js"></script>
-  </body>
 
-
-  
-  <head>
-    <title>javaScript example exp system</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="styles.css" />
+  <title>Focus Pets</title>
 </head>
-<body>
-    <div id="out"></div>
-    <script src="main.js"></script>
-    <script>
-var l = 500,
-cap = 5000,
-deltaNext = 100,
-html = '',
-levelObj;
-while (l < cap) {
-levelObj = XP.parseByXP(l, cap, deltaNext);
-html = '<span> level: ' + levelObj.level + '; xp: ' + levelObj.xp + '; toNext: ' + levelObj.toNext + ' </span><br>';
-l += 50;
-}
-document.getElementById('out').innerHTML = html;
-    </script>
-#pikachu
-#ash
-</body>
 
+<body>
+  <nav class="navbar navbar-dark">
+    <div class="container-fluid">
+      <a class="nav-link" href="#">About</a>
+      <a class="nav-link" href="#">Shop</a>
+      <a class="navbar-brand" id="focus-pet" href="#">FOCUS PETS</a>
+      <a class="nav-link" href="#">Login</a>
+      <a class="nav-link" href="#">Stats</a>
+    </div>
+  </nav>
+
+  <div class="container_fluid">
+    <div class="row">
+      <div class="timer col-6">
+        <!-- <div class="mx-auto mt-5" id="circle"></div> -->
+        <div id="pomodoro-app">
+          <div id="container">
+            <div id="timer">
+              <div id="time">
+                <span id="minutes">25</span>
+                <span id="colon">:</span>
+                <span id="seconds">00</span>
+              </div>
+              <div id="filler"></div>
+            </div>
+        
+            <div id="buttons">
+              <button id="work">Work</button>
+              <button id="shortBreak">Short Break</button>
+              <button id="longBreak">Long Break</button>
+              <button id="stop">Stop</button>
+            </div>
+            <div id = "scores">
+              <p id = "score"> 0</p>
+              <p id = "cycles"> 0</p>
+      
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div id="myDIV" class="header">
+            <h2>My To Do List</h2>
+            <input type="text" id="myInput" placeholder="Title...">
+            <span onclick="newElement()" class="addBtn">Add</span>
+          </div>
+          
+          <ul id="myUL">
+            <li>Hit the gym</li>
+            <li class="checked">Pay bills</li>
+            <li>Meet George</li>
+            <li>Buy eggs</li>
+            <li>Read a book</li>
+            <li>Organize office</li>
+          </ul>
+        </div>
+        <div class="row mx-auto running-dog"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+    crossorigin="anonymous"></script>
+</body>
 
 </html>
