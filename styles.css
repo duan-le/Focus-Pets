@@ -36,17 +36,22 @@ body {
   }
 }
 
-.panting-dog {
-  width: 500px;
-  height: 397px;
-  background: url('./panting_dog.png');
-  animation: panting-play 0.7s steps(4) infinite;
+.about-t {
+  padding-top: 5rem;
+  font-size: 18px;
+  color: aquamarine; 
+  text-align: center;
 }
 
-@keyframes panting-play {
-  100% {
-    background-position: 2000px;
-  }
+.about-p {
+  padding-top: 5rem;
+  color: white;
+  text-align: center;
+}
+
+.unavailable {
+  padding-top: 10rem;
+  text-align: center;
 }
 
 #container {
