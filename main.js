@@ -42,7 +42,7 @@ var pomodoro = {
     this.fillerHeight = 0;
   },
   startWork: function () {
-    this.resetVariables(0, 1, true);
+    this.resetVariables(25, 0, true);
   },
   startShortBreak: function () {
     this.resetVariables(5, 0, true);
