@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <div id="cat"></div>
+    <p class="score"></p>
     <main class="app">
       <progress id="js-progress" value="0"></progress>
       <div class="progress-bar"></div>
@@ -52,4 +54,31 @@
     </div>
     <script src="main.js"></script>
   </body>
+
+
+  
+  <head>
+    <title>javaScript example exp system</title>
+</head>
+<body>
+    <div id="out"></div>
+    <script src="main.js"></script>
+    <script>
+var l = 500,
+cap = 5000,
+deltaNext = 100,
+html = '',
+levelObj;
+while (l < cap) {
+levelObj = XP.parseByXP(l, cap, deltaNext);
+html = '<span> level: ' + levelObj.level + '; xp: ' + levelObj.xp + '; toNext: ' + levelObj.toNext + ' </span><br>';
+l += 50;
+}
+document.getElementById('out').innerHTML = html;
+    </script>
+#pikachu
+#ash
+</body>
+
+
 </html>

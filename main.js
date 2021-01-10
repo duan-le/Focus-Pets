@@ -1,11 +1,12 @@
 const timer = {
-  pomodoro: 25,
+  pomodoro: 0,
   shortBreak: 5,
   longBreak: 15,
   longBreakInterval: 4,
   sessions: 0,
+  
 };
-
+let score = 0;
 let interval;
 
 const buttonSound = new Audio('button-sound.mp3');
@@ -55,7 +56,8 @@ function startTimer() {
     total = timer.remainingTime.total;
     if (total <= 0) {
       clearInterval(interval);
-
+      score += 50;
+      document.querySelector('.score').innerHTML = score
       switch (timer.mode) {
         case 'pomodoro':
           if (timer.sessions % timer.longBreakInterval === 0) {
@@ -154,3 +156,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
   switchMode('pomodoro');
 });
+////////////////////////////////////////////////////////////////////////////////////////////////////////
