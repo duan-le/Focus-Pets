@@ -37,46 +37,37 @@
               </div>
               <div id="filler"></div>
             </div>
+          </div>
 
-            <div class="row">
-              <div id="buttons">
-                <button id="work">Work</button>
-                <button id="shortBreak">Short Break</button>
-                <button id="longBreak">Long Break</button>
-                <button id="stop">Stop</button>
-              </div>
-              <div class="row">
-                <p id="score">Score: 0</p>
-                <p id="cycles">Cycles: 0</p>
-              </div>
+          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group mx-auto" role="group" aria-label="Second group">
+              <button type="button" class="btn btn-secondary" id="work">Start</button>
+              <button type="button" class="btn btn-secondary" id="shortBreak">Short Break</button>
+              <button type="button" class="btn btn-secondary" id="longBreak">Long Break</button>
+              <button type="button" class="btn btn-secondary" id="stop">Stop</button>
             </div>
+          </div>
+
+          <div class="row mx-auto pt-2 stat">
+            <p id="statistic">Score: 0 | Sessions: 0</p>
+          </div>
+
+          <div class="row pt-5">
+            <div id="myDIV" class="header">
+              <h2 class="listName">Focus List</h2>
+              <input type="text" id="myInput" placeholder="Task...">
+              <span onclick="newElement()" class="addBtn">Add</span>
+            </div>
+
+            <ul id="myUL"></ul>
           </div>
         </div>
       </div>
 
-      <div class="row">
-        <div id="myDIV" class="header">
-          <h2>My To Do List</h2>
-          <input type="text" id="myInput" placeholder="Title...">
-          <span onclick="newElement()" class="addBtn">Add</span>
-        </div>
-
-        <ul id="myUL">
-          <li>Hit the gym</li>
-          <li class="checked">Pay bills</li>
-          <li>Meet George</li>
-          <li>Buy eggs</li>
-          <li>Read a book</li>
-          <li>Organize office</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <script src="main.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-    crossorigin="anonymous"></script>
+      <script src="main.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
+      </script>
 </body>
 
 </html>
