@@ -87,6 +87,7 @@ var pomodoro = {
     score += 50;
     cycles += 1;
     document.querySelector('#statistic').innerHTML = 'Score: ' + score + ' | Sessions: ' + cycles;
+    alert("Time's Up!");
   }
 };
 window.onload = function () {
