@@ -6,11 +6,12 @@ body {
   overflow-x: hidden;
 }
 
-#circle {
-  width: 400px;
-  height: 400px;
-  background: red;
-  border-radius: 50%
+.nav-link {
+  color: white;
+}
+
+.nav-link:hover {
+  color: aquamarine;
 }
 
 .navbar {
@@ -56,14 +57,14 @@ body {
 }
 
 #timer{ 
-  color:rgb(17, 17, 17); 
+  color: black; 
   font-size:50px; 
   margin:10px auto;
-  border : 5px solid rgb(59, 59, 59);
-  background-color: rgb(59, 59, 59);
+  border : 4px solid black;
+  background-color: white;
   border-radius:50%;
-  width:200px;
-  height:200px;
+  width:300px;
+  height:300px;
   overflow:hidden;
   position:relative;
   -webkit-user-select: none;
@@ -74,15 +75,15 @@ body {
 }
 
 #time{
-  margin-top:70px;
+  margin-top:105px;
   z-index : 1;
   position:relative;
 }
 
 #filler{
-  background : #54ec07;
+  background : aquamarine;
   height: 0px;
-  width: 200px;
+  width: 300px;
   position:absolute;
   bottom:0;
 }

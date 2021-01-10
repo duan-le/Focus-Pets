@@ -38,11 +38,11 @@ var pomodoro = {
     this.minutes = mins;
     this.seconds = secs;
     this.started = started;
-    this.fillerIncrement = 200/(this.minutes*60);
+    this.fillerIncrement = 300/(this.minutes*60);
     this.fillerHeight = 0;  
   },
   startWork: function() {
-    this.resetVariables(1, 0, true);
+    this.resetVariables(25, 0, true);
   },
   startShortBreak : function(){
     this.resetVariables(5, 0, true);
