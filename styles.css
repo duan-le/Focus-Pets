@@ -26,7 +26,7 @@ body {
 .running-dog {
   width: 250px;
   height: 200px;
-  background: url('./running_dog.png');
+  background: url('./assets/running_dog.png');
   animation: running-play 1s steps(8) infinite;
 }
 
