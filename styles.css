@@ -39,7 +39,7 @@ body {
 .about-t {
   padding-top: 5rem;
   font-size: 18px;
-  color: aquamarine; 
+  color: aquamarine;
   text-align: center;
 }
 
@@ -91,19 +91,23 @@ body {
   bottom: 0;
 }
 
-#work:hover {
+#work:hover,
+#work:focus {
   color: greenyellow;
 }
 
-#shortBreak:hover {
+#shortBreak:hover,
+#shortBreak:focus {
   color: lightblue;
 }
 
-#longBreak:hover {
+#longBreak:hover,
+#longBreak:focus {
   color: lightsalmon;
 }
 
-#stop:hover {
+#stop:hover,
+#stop:focus {
   color: #f44336;
 }
 
