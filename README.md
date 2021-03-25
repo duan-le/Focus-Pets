@@ -1,5 +1,5 @@
 # Study-Timer-App
-A gamified study timer app for nwHacks2021.
+A gamified study timer app for nwHacks2021. Try it out [here](http://focuspets.me/) 
 
 # Team
 - Duan Le
